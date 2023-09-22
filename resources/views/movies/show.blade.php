@@ -71,21 +71,23 @@
         <div class="container mx-auto px-4 py-16">
             <h2 class="text-4xl font-semibold">Cast</h2>
             <div class="grid grid-cols01 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-16">
-                {{-- @foreach ($castOfMovie as $cast)
-                    <div class="mt-8">
-                        <a href="#">
-                            <img src="{{ 'https://image.tmdb.org/t/p/w500/' . $cast['profile_path'] }}" alt="parasite"
-                                class="hover:opacity-75 transition
+                @foreach ($movie['credits']['cast'] as $cast)
+                    @if ($loop->index < 5)
+                        <div class="mt-8">
+                            <a href="#">
+                                <img src="{{ 'https://image.tmdb.org/t/p/w300/' . $cast['profile_path'] }}" alt="parasite"
+                                    class="hover:opacity-75 transition
                             ease-in-out duration-150">
-                        </a>
-                        <div class="mt-2">
-                            <a href="#" class="text-lg mt-2 hover:text-gray:300">{{ $cast['name'] }}</a>
-                            <div class="text-sm text-gray-400">
-                                {{ $cast['original_name'] }}
+                            </a>
+                            <div class="mt-2">
+                                <a href="#" class="text-lg mt-2 hover:text-gray:300">{{ $cast['name'] }}</a>
+                                <div class="text-sm text-gray-400">
+                                    {{ $cast['character'] }}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                @endforeach --}}
+                    @endif
+                @endforeach
             </div>
         </div>
     </div>
@@ -96,12 +98,14 @@
         <div class="container mx-auto px-4 py-16">
             <h2 class="text-4xl font-semibold">Images</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-                {{-- @foreach ($imgMovieDetail as $img)
-                    <div class="mt-8">
-                        <img src="{{ 'https://image.tmdb.org/t/p/w500/' . $img['file_path'] }}" alt=""
-                            class="hover:opacity-75 transition ease-in-out duration-150">
-                    </div>
-                @endforeach --}}
+                @foreach ($movie['images']['posters'] as $poster)
+                    @if ($loop->index < 6)
+                        <div class="mt-8">
+                            <img src="{{ 'https://image.tmdb.org/t/p/w300/' . $poster['file_path'] }}" alt=""
+                                class="hover:opacity-75 transition ease-in-out duration-150">
+                        </div>
+                    @endif
+                @endforeach
             </div>
         </div>
     </div>
