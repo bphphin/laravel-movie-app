@@ -41,4 +41,18 @@ class MovieController extends Controller
 
         return view('movies.index',compact('popularMovie','genres','nowPlayingMovie'));
     }
+
+
+    public function show($id) {
+        $token_movie = config('api_url.movie_token');
+        $api_movie_details = config('api_url.api_movie_details');
+
+        // Movie details
+        $movie = Http::withToken($token_movie)
+            ->get($api_movie_details.$id.'?append_to_response=credits,videos,images')
+            ->json();
+        dump($movie);
+
+        return view('movies.show',compact('movie'));
+    }
 }
