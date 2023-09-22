@@ -4,10 +4,10 @@
     <div class="movie-info border-b border-gray-800">
 
         <div class="container mx-auto px-4 py-16 flex">
-            <img src="/img/parasite.jpg" alt="" class="w-96" width="24rem">
-
+            <img src="{{ 'https://image.tmdb.org/t/p/w500/' . $movie['poster_path'] }}" alt="" class="w-96"
+                width="24rem">
             <div class="ml-24">
-                <h2 class="text-4xl font-semibol">Parasite</h2>
+                <h2 class="text-4xl font-semibol">{{ $movie['title'] }}</h2>
                 <div class="flex items-center text-gray-400 text-sm mt-1">
                     <svg class="fill-current text-orange-500 w-4" viewBox="0 0 24 24">
                         <g data-name="Layer 2">
@@ -16,28 +16,33 @@
                                 data-name="star" />
                         </g>
                     </svg>
-                    <span class="ml-1">85%</span>
-                    <span class="">Feb 20, 2023</span>
+                    <span class="ml-1">{{ $movie['vote_average'] * 10 . '%' }}</span>
+                    <span class="">{{ \Carbon\Carbon::parse($movie['release_date'])->format('M d,Y') }}</span>
                     <span class="mx-2">|</span>
-                    <span class="">Action, Drama</span>
+                    @foreach ($movie['genres'] as $movieGenre)
+                        <span class="">{{ $movieGenre['name'] }}</span>
+                        @if (!$loop->last)
+                            ,
+                        @endif
+                    @endforeach
                 </div>
-                <p class="text-gray-300 mt-8">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident quo quisquam fugit ducimus vero hic
-                    quidem repudiandae reprehenderit error neque aperiam ab iste nihil a eaque id, ullam doloribus
-                    consectetur.
-                </p>
+                <p class="text-gray-300 mt-8">{{ $movie['overview'] }}</p>
 
                 <div class="mt-12">
                     <h4 class="text-white font-semibol">Featured Cast</h4>
                     <div class="flex mt-4">
-                        <div>
-                            <div>Boong Joon-Ho</div>
-                            <div class="text-sm text-gray-400">Screenplay, Director, Story</div>
-                        </div>
-                        <div class="ml-8">
+                        @foreach ($movie['credits']['crew'] as $crew)
+                            @if ($loop->index < 2)
+                                <div class='mr-8'>
+                                    <div>{{ $crew['name'] }}</div>
+                                    <div class="text-sm text-gray-400">{{ $crew['job'] }}</div>
+                                </div>
+                            @endif
+                        @endforeach
+                        {{-- <div class="ml-8">
                             <div>Han Jin-Won</div>
                             <div class="text-sm text-gray-400">Screenplay, Director, Story</div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
 
@@ -64,71 +69,21 @@
         <div class="container mx-auto px-4 py-16">
             <h2 class="text-4xl font-semibold">Cast</h2>
             <div class="grid grid-cols01 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-16">
-                <div class="mt-8">
-                    <a href="#">
-                        <img src="/img/actor1.jpg" alt="parasite"
-                            class="hover:opacity-75 transition
-                        ease-in-out duration-150">
-                    </a>
-                    <div class="mt-2">
-                        <a href="#" class="text-lg mt-2 hover:text-gray:300">Name</a>
-                        <div class="text-sm text-gray-400">
-                            a
+                {{-- @foreach ($castOfMovie as $cast)
+                    <div class="mt-8">
+                        <a href="#">
+                            <img src="{{ 'https://image.tmdb.org/t/p/w500/' . $cast['profile_path'] }}" alt="parasite"
+                                class="hover:opacity-75 transition
+                            ease-in-out duration-150">
+                        </a>
+                        <div class="mt-2">
+                            <a href="#" class="text-lg mt-2 hover:text-gray:300">{{ $cast['name'] }}</a>
+                            <div class="text-sm text-gray-400">
+                                {{ $cast['original_name'] }}
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="mt-8">
-                    <a href="#">
-                        <img src="/img/actor2.jpg" alt="parasite"
-                            class="hover:opacity-75 transition
-                        ease-in-out duration-150">
-                    </a>
-                    <div class="mt-2">
-                        <a href="#" class="text-lg mt-2 hover:text-gray:300">Name</a>
-                        <div class="text-sm text-gray-400">
-                            a
-                        </div>
-                    </div>
-                </div>
-                <div class="mt-8">
-                    <a href="#">
-                        <img src="/img/actor3.jpg" alt="parasite"
-                            class="hover:opacity-75 transition
-                        ease-in-out duration-150">
-                    </a>
-                    <div class="mt-2">
-                        <a href="#" class="text-lg mt-2 hover:text-gray:300">Name</a>
-                        <div class="text-sm text-gray-400">
-                            a
-                        </div>
-                    </div>
-                </div>
-                <div class="mt-8">
-                    <a href="#">
-                        <img src="/img/actor4.jpg" alt="parasite"
-                            class="hover:opacity-75 transition
-                        ease-in-out duration-150">
-                    </a>
-                    <div class="mt-2">
-                        <a href="#" class="text-lg mt-2 hover:text-gray:300">Name</a>
-                        <div class="text-sm text-gray-400">
-                            a
-                        </div>
-                    </div>
-                </div>
-                <div class="mt-8">
-                    <a href="#">
-                        <img src="/img/actor5.jpg" alt="parasite"
-                            class="hover:opacity-75 transition
-                        ease-in-out duration-150">
-                    </a>
-                    <div class="mt-2">
-                        <a href="#" class="text-lg mt-2 hover:text-gray:300">Name</a>
-                        <div class="text-sm text-gray-400">
-                            a
-                        </div>
-                    </div>
-                </div>
+                @endforeach --}}
             </div>
         </div>
     </div>
@@ -139,27 +94,12 @@
         <div class="container mx-auto px-4 py-16">
             <h2 class="text-4xl font-semibold">Images</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-                <div class="mt-8">
-                    <img src="/img/image1.jpg" alt="" class="hover:opacity-75 transition ease-in-out duration-150">
-                </div>
-                <div class="mt-8">
-                    <img src="/img/image2.jpg" alt="" class="hover:opacity-75 transition ease-in-out duration-150">
-                </div>
-                <div class="mt-8">
-                    <img src="/img/image3.jpg" alt="" class="hover:opacity-75 transition ease-in-out duration-150">
-                </div>
-                <div class="mt-8">
-                    <img src="/img/image4.jpg" alt=""
-                        class="hover:opacity-75 transition ease-in-out duration-150">
-                </div>
-                <div class="mt-8">
-                    <img src="/img/image5.jpg" alt=""
-                        class="hover:opacity-75 transition ease-in-out duration-150">
-                </div>
-                <div class="mt-8">
-                    <img src="/img/image6.jpg" alt=""
-                        class="hover:opacity-75 transition ease-in-out duration-150">
-                </div>
+                {{-- @foreach ($imgMovieDetail as $img)
+                    <div class="mt-8">
+                        <img src="{{ 'https://image.tmdb.org/t/p/w500/' . $img['file_path'] }}" alt=""
+                            class="hover:opacity-75 transition ease-in-out duration-150">
+                    </div>
+                @endforeach --}}
             </div>
         </div>
     </div>
