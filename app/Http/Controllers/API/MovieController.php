@@ -36,9 +36,6 @@ class MovieController extends Controller
         $nowPlayingMovie = Http::withToken($token_movie)
             ->get($api_now_playing)
             ->json()['results'];
-        dump($nowPlayingMovie);
-
-
         return view('movies.index',compact('popularMovie','genres','nowPlayingMovie'));
     }
 
@@ -51,8 +48,6 @@ class MovieController extends Controller
         $movie = Http::withToken($token_movie)
             ->get($api_movie_details.$id.'?append_to_response=credits,videos,images')
             ->json();
-        dump($movie);
-
         return view('movies.show',compact('movie'));
     }
 }
