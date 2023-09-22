@@ -6,4 +6,5 @@ use App\Http\Controllers\API\MovieController;
 
 Route::controller(MovieController::class)->group(function() {
     Route::get('/', 'index')->name('movie.index');
+    Route::get('/{id}','show')->name('movie.show');
 });
