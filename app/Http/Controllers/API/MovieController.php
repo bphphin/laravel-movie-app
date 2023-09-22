@@ -12,10 +12,14 @@ class MovieController extends Controller
         $api_genre = config('api_url.api_genre');
         $token_movie = config('api_url.movie_token');
 
+        $api_now_playing = config('api_url.api_now_playing');
+
+        // Popular movies list
         $popularMovie = Http::withToken($token_movie)
         ->get($api_movie_popular)
         ->json()['results'];
 
+        // Genre movies list
         $genreArray = Http::withToken($token_movie)
         ->get($api_genre)
         ->json()['genres'];
@@ -25,9 +29,16 @@ class MovieController extends Controller
                 $genre['id'] => $genre['name']
             ];
         });
-        dump($genres);
-        dump($popularMovie);
 
-        return view('movies.index',compact('popularMovie','genres'));
+
+        // Now playing movies list
+
+        $nowPlayingMovie = Http::withToken($token_movie)
+            ->get($api_now_playing)
+            ->json()['results'];
+        dump($nowPlayingMovie);
+
+
+        return view('movies.index',compact('popularMovie','genres','nowPlayingMovie'));
     }
 }
