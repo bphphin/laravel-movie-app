@@ -24,20 +24,12 @@
 
         <div class="flex flex-col md:flex-row items-center">
             {{-- <livewire:search-dropdown> --}}
-            <div class="flex items-center">
-                <div class="relative">
-                    <input type="text" name="" id=""
-                        class="bg-gray-800 rounded-full w-64 px-4 pl-8 py-1 focus:outline-none focus:shadow-outline"
-                        placeholder="Search...">
-                </div>
-            </div>
+            <livewire:search-dropdown />
             <div class="md:ml-4 mt-3 md:mt-0">
                 <a href="#">
                     <img src="/img/african-man.png" alt="avatar" class="rounded-full w-8 h-8 object-fit-cover">
                 </a>
             </div>
         </div>
-
-
     </div>
 </nav>
