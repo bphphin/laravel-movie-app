@@ -37,6 +37,8 @@
                                     <div>{{ $crew['name'] }}</div>
                                     <div class="text-sm text-gray-400">{{ $crew['job'] }}</div>
                                 </div>
+                            @else
+                                @break
                             @endif
                         @endforeach
                         {{-- <div class="ml-8">
@@ -112,6 +114,8 @@
                                 </div>
                             </div>
                         </div>
+                    @else
+                        @break
                     @endif
                 @endforeach
             </div>
@@ -130,6 +134,8 @@
                             <img src="{{ 'https://image.tmdb.org/t/p/w500/' . $poster['file_path'] }}" alt=""
                                 class="hover:opacity-75 transition ease-in-out duration-150">
                         </div>
+                    @else
+                        @break
                     @endif
                 @endforeach
             </div>
