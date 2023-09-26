@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\ViewModels\MoviesViewModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 class MovieController extends Controller
@@ -36,7 +37,11 @@ class MovieController extends Controller
         $nowPlayingMovie = Http::withToken($token_movie)
             ->get($api_now_playing)
             ->json()['results'];
-        return view('movies.index',compact('popularMovie','genres','nowPlayingMovie'));
+
+        $viewModels = new MoviesViewModel($popularMovie, $nowPlayingMovie, $genres);
+
+        return view('movies.index',$viewModels);
+        // return view('movies.index',compact('popularMovie','genres','nowPlayingMovie'));
     }
 
 
